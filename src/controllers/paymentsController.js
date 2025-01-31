@@ -1,16 +1,34 @@
 import { prisma } from '../db/index.js';
 import asyncHandler from 'express-async-handler';
+import Joi from 'joi';
+
+const paymentSchema = Joi.object({
+	penjualan_id: Joi.number().integer().positive().required().messages({
+		'number.base': 'Penjulan ID harus berupa angka',
+		'number.integer': 'Penjualan ID harus berupa angka bulat.',
+		'number.positive': 'Penjualan ID harus lebih besar dari 0.',
+		'any.required': 'Penjualan ID harus diisi.',
+	}),
+	jumlah_pembayaran: Joi.number().integer().positive().required().messages({
+		'number.base': 'Jumlah pembayaran harus berupa angka.',
+		'number.integer': 'Jumlah pembayaran harus berupa angka bulat.',
+		'number.positive': 'Jumlah pembayaran harus lebih besar dari 0.',
+		'any.required': 'Jumlah pembayaran harus diisi.',
+	}),
+	tanggal_pembayaran: Joi.date().iso().required().messages({
+		'date.base': 'Tanggal pembayaran tidak valid.',
+		'any.required': 'Tanggal pembayaran harus diisi.',
+	}),
+});
 
 export const creditPayments = asyncHandler(async (req, res) => {
-	const { penjualan_id, jumlah_pembayaran, tanggal_pembayaran } = req.body;
-
-	// Validasi data
-	if (!penjualan_id || !jumlah_pembayaran || !tanggal_pembayaran) {
-		res.status(400);
-		throw new Error(
-			'Semua field harus diisi: penjualan_id, jumlah_pembayaran, tanggal_pembayaran'
-		);
+	const { error } = paymentSchema.validate(req.body, { abortEarly: false });
+	if (error) {
+		const errorMessages = error.details.map(err => err.message);
+		return res.status(400).json({ errors: errorMessages });
 	}
+
+	const { penjualan_id, jumlah_pembayaran, tanggal_pembayaran } = req.body;
 
 	// Cek apakah transaksi penjualan ada
 	const penjualan = await prisma.penjualan.findUnique({
@@ -64,5 +82,5 @@ export const paymentsHistory = asyncHandler(async (req, res) => {
 		tanggal_pembayaran: payment.tanggal_pembayaran,
 	}));
 
-	res.status(200).json({ success: 200, paymentsHistory: result });
+	res.status(200).json({ success: true, paymentsHistory: result });
 });

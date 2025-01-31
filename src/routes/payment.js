@@ -8,6 +8,6 @@ import {
 
 // Endpoint untuk melakukan pembayaran kredit
 router.post('/', creditPayments);
-router.get('/payment-history', paymentsHistory);
+router.get('/payments-history', paymentsHistory);
 
 export default router;
