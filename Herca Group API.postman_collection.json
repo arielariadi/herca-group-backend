@@ -1,0 +1,86 @@
+{
+	"info": {
+		"_postman_id": "b120914c-7bfe-48ae-ac52-43c242f9edf0",
+		"name": "Herca Group API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12320853"
+	},
+	"item": [
+		{
+			"name": "Marketings Commisions",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:2000/v1/marketings",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "2000",
+					"path": [
+						"v1",
+						"marketings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Credit Payments",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"penjualan_id\": 1,\r\n  \"jumlah_pembayaran\": 1000000,\r\n  \"tanggal_pembayaran\": \"2023-10-05\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:2000/v1/payments",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "2000",
+					"path": [
+						"v1",
+						"payments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Payments History",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:2000/v1/payments/payments-history",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "2000",
+					"path": [
+						"v1",
+						"payments",
+						"payments-history"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
