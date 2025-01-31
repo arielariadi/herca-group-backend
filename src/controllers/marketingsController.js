@@ -1,7 +1,7 @@
 import { prisma } from '../db/index.js';
 import asyncHandler from 'express-async-handler';
 
-export const marketingCommision = asyncHandler(async (req, res) => {
+export const marketingsCommisions = asyncHandler(async (req, res) => {
 	const sales = await prisma.penjualan.findMany({
 		include: { marketing: true },
 	});
@@ -12,6 +12,7 @@ export const marketingCommision = asyncHandler(async (req, res) => {
 
 		if (!acc[key]) {
 			acc[key] = {
+				id_marketing: sale.marketing.id,
 				marketing: sale.marketing.name,
 				bulan: month,
 				omzet: 0,
@@ -38,5 +39,18 @@ export const marketingCommision = asyncHandler(async (req, res) => {
 		return acc;
 	}, {});
 
-	res.json(Object.values(result));
+	const sortedResult = Object.values(result).sort((a, b) => {
+		// Pertama, sory berdasarkan bulan
+		const monthCompare = a.bulan.localeCompare(b.bulan);
+		if (monthCompare !== 0) return monthCompare;
+
+		// Lalu, sort berdasarkan id: Alfandy (1), Mery (2), Danang (3)
+		const marketingOrder = [1, 2, 3];
+		return (
+			marketingOrder.indexOf(a.id_marketing) -
+			marketingOrder.indexOf(b.id_marketing)
+		);
+	});
+
+	res.json(sortedResult);
 });
