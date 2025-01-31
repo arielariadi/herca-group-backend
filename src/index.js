@@ -1,12 +1,17 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import { PrismaClient } from '@prisma/client';
+
+import marketingRoute from './routes/marketing.js';
 
 dotenv.config();
 const app = express();
-const prisma = new PrismaClient();
+
+app.use(cors());
 
 const PORT = process.env.PORT || 5000;
+
+// Routes
+app.use('/v1/marketings', marketingRoute);
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
