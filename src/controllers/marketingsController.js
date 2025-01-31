@@ -21,7 +21,6 @@ export const marketingsCommisions = asyncHandler(async (req, res) => {
 			};
 		}
 		acc[key].omzet += sale.grand_total;
-
 		acc[key].omzet = Math.floor(acc[key].omzet / 1000) * 1000;
 
 		// Hitung komisi berdasarkan omzet
@@ -40,7 +39,7 @@ export const marketingsCommisions = asyncHandler(async (req, res) => {
 	}, {});
 
 	const sortedResult = Object.values(result).sort((a, b) => {
-		// Pertama, sory berdasarkan bulan
+		// Pertama, sort berdasarkan bulan
 		const monthCompare = a.bulan.localeCompare(b.bulan);
 		if (monthCompare !== 0) return monthCompare;
 

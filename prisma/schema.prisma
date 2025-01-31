@@ -28,7 +28,7 @@ model Penjualan {
   total_balance       Int
   grand_total         Int
   marketing           Marketing @relation(fields: [marketing_id], references: [id])
-  pembayaran          Pembayaran[] // relasi one-to-many ke Pembayaran
+  pembayaran          Pembayaran[] 
 }
 
 model Pembayaran {
