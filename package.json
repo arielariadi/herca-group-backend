@@ -1,0 +1,12 @@
+{
+	"name": "herca-group-backend",
+	"version": "1.0.0",
+	"description": "Ini adalah bagian backend untuk tes coding di PT Herca Group",
+	"license": "ISC",
+	"author": "Muhammad Ariel Ariadi",
+	"type": "module",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	}
+}
