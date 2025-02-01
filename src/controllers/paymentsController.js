@@ -39,6 +39,21 @@ export const creditPayments = asyncHandler(async (req, res) => {
 		res.status(404).json({ message: 'Penjualan tidak ditemukan!' });
 	}
 
+	// Cek apakah grand_total sudah lunas/0
+	if (penjualan.grand_total <= 0) {
+		return res.status(400).json({
+			message:
+				'Pembayaran sudah lunas. Anda tidak dapat melakukan pembayaran lagi!',
+		});
+	}
+
+	// Memastikan jumlah pembayaran tidak lebih dari sisa grand_total
+	if (jumlah_pembayaran > penjualan.grand_total) {
+		return res.status(400).json({
+			message: `Jumlah pembayaran melebihi sisa tagihan. Sisa yang harus dibayar: ${penjualan.grand_total}`,
+		});
+	}
+
 	const pembayaran = await prisma.pembayaran.create({
 		data: {
 			penjualan_id,
