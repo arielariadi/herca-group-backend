@@ -14,7 +14,7 @@ export const allSales = asyncHandler(async (req, res) => {
 		marketing: sale.marketing.name,
 		date: sale.date,
 		cargo_fee: sale.cargo_fee,
-		total_balanse: sale.total_balance,
+		total_balance: sale.total_balance,
 		grand_total: sale.grand_total,
 	}));
 
