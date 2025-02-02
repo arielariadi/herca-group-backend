@@ -70,7 +70,7 @@ Repository ini adalah bagian backend untuk tes coding di Herca Group
 
   <br>
 
-# Tech Stack
+# Tech Stack 💻
   1. **Express JS**
   2. **PostgreSQL**
   3. **Prisma**
