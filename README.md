@@ -7,7 +7,7 @@ Repository ini adalah bagian backend untuk tes coding di Herca Group
 # Installation 🚀
 
 1. Clone repository ini:
-   ```bask
+   ```bash
    git clone https://github.com/arielariadi/herca-group-backend.git
    ```
 
