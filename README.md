@@ -11,7 +11,7 @@ Repository ini adalah bagian backend untuk tes coding di Herca Group
    git clone https://github.com/arielariadi/herca-group-backend.git
    ```
 
-2. Install depedensi
+2. Install dependency
    ```bash
    npm install
    ```
